@@ -1,4 +1,4 @@
-package example.cashcard;
+package nullpointerexceptionals.cashcard;
 
 import org.springframework.data.annotation.Id;
 
