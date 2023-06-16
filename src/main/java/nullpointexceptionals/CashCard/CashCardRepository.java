@@ -1,4 +1,4 @@
-package nullpointerexceptionals.cashcard;
+package nullpointexceptionals.cashcard;
 
 import org.springframework.data.repository.CrudRepository;
 
