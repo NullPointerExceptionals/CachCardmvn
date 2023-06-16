@@ -1,4 +1,4 @@
-package nullpointexceptionals.cashcard;
+package nullpointexceptionals.CashCard;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
