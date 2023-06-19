@@ -84,4 +84,17 @@ public class CashCardController {
          return ResponseEntity.notFound().build();
    }
 
+   //Create by Owner
+       @PostMapping
+   public ResponseEntity<?> createCashCard(@RequestBody CashCard newCashCardRequest, UriComponentsBuilder ucb) {
+   CashCard savedCashCard = cashCardRepository.save(newCashCardRequest);
+   URI locationOfNewCashCard = ucb
+            .path(“/owner/{owner}")
+            .buildAndExpand(savedCashCard.id())
+            .toUri();
+   return ResponseEntity.created(locationOfNewCashCard).build();
+}
+
+   
+
 }
