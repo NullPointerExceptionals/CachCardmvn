@@ -18,12 +18,15 @@ public class CashCardJsonTest {
     @Test
     public void cashCardSerializationTest() throws IOException {
         CashCard cashCard = new CashCard(1L, 100.0, "Natalie");
-        assertThat(json.write(cashCard)).isStrictlyEqualToJson("expected.json");
+        assertThat(json.write(cashCard)).isStrictlyEqualToJson("single.json");
         assertThat(json.write(cashCard)).hasJsonPathNumberValue("@.id");
         assertThat(json.write(cashCard)).extractingJsonPathNumberValue("@.id")
                 .isEqualTo(1);
         assertThat(json.write(cashCard)).hasJsonPathNumberValue("@.amount");
         assertThat(json.write(cashCard)).extractingJsonPathNumberValue("@.amount")
              .isEqualTo(100.00);
+        assertThat(json.write(cashCard)).hasJsonPathNumberValue("@.owner");
+        assertThat(json.write(cashCard)).extractingJsonPathNumberValue("@.owner")
+             .isEqualTo("Natalie");
     }
 }
