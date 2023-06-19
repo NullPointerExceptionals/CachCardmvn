@@ -76,4 +76,15 @@ public class CashCardController {
       }
    }
 
+      // Update by Owner and ID
+    @PutMapping("/owner/{owner}/{id}")
+   public ResponseEntity<?> findByOwnerAndId(@PathVariable String owner, @PathVariable Long id, @RequestBody CashCard cashCardUpdate) {
+      CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id);
+      CashCard updatedCashCard = new CashCard(cashCard.owner(), cashCard.id(), cashCardUpdate.amount());
+      cashCardRepository.save(updatedCashCard);
+      return ResponseEntity.noContent().build();
+   }
+
+   
+
 }
