@@ -17,9 +17,11 @@ import java.util.Optional;
 @RequestMapping("/cashcards")
 public class CashCardController {
    private CashCardRepository cashCardRepository;
+   private final TransactionRepository transactionRepository;
 
-   public CashCardController(CashCardRepository cashCardRepository) {
+   public CashCardController(CashCardRepository cashCardRepository, TransactionRepository transactionRepository) {
       this.cashCardRepository = cashCardRepository;
+      this.transactionRepository = transactionRepository;
    }
 
    private CashCard findCashCard(Long requestedId) {
@@ -97,5 +99,16 @@ public class CashCardController {
 }
 
    
+
+   // // TRANSACTIONS
+
+   @GetMapping("/{id}/transactions")
+   public ResponseEntity<List<Transaction>> getTransactionsByCashCardId(@PathVariable Long id) {
+      List<Transaction> transactions = transactionRepository.findByCashCardId(id);
+      if (transactions.isEmpty()) {
+         return ResponseEntity.notFound().build();
+      }
+      return ResponseEntity.ok(transactions);
+   }
 
 }
