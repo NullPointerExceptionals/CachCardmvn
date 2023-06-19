@@ -68,4 +68,25 @@ class CashcardApplicationTests {
    
 	}
 
+    @Test
+	@DirtiesContext
+	void shouldUpdateAnExistingCashCard() {
+    CashCard cashCardUpdate = new CashCard(null, 100.0, null);
+    HttpEntity<CashCard> request = new HttpEntity<>(cashCardUpdate);
+    ResponseEntity<Void> response = restTemplate
+            .exchange("/cashcards/owner/Natalie/1", HttpMethod.PUT, request, Void.class);
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+	ResponseEntity<String> getResponse = restTemplate
+          .getForEntity("/cashcards/owner/Natalie/1", String.class);
+  	assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+  	DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
+  	Number id = documentContext.read("$.id");
+  	Double amount = documentContext.read("$.amount");
+    String owner = documentContext.read("$.owner");
+  	assertThat(id).isEqualTo(1);
+  	assertThat(amount).isEqualTo(200.00);
+    assertThat(owner).isEqualTo("Natalie");
+	
+	}
+
 }
