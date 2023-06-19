@@ -74,7 +74,7 @@ public class CashCardController {
    @PutMapping("/owner/{owner}/{id}")
    public ResponseEntity<?> findByOwnerAndId(@PathVariable String owner, @PathVariable Long id,
          @RequestBody CashCard cashCardUpdate) {
-      CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id)
+      CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id);
       if (cashCard != null) {
       double updatedAmount = cashCard.amount() + cashCardUpdate.amount();
       CashCard updatedCashCard = new CashCard(cashCard.id(), updatedAmount, cashCard.owner());
@@ -83,13 +83,14 @@ public class CashCardController {
       } else {
          return ResponseEntity.notFound().build();
    }
+}
 
    //Create by Owner
        @PostMapping
    public ResponseEntity<?> createCashCard(@RequestBody CashCard newCashCardRequest, UriComponentsBuilder ucb) {
    CashCard savedCashCard = cashCardRepository.save(newCashCardRequest);
    URI locationOfNewCashCard = ucb
-            .path(“/owner/{owner}")
+            .path(/owner/{owner}")
             .buildAndExpand(savedCashCard.id())
             .toUri();
    return ResponseEntity.created(locationOfNewCashCard).build();
