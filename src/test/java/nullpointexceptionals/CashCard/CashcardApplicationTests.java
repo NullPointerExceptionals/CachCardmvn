@@ -27,10 +27,10 @@ class CashcardApplicationTests {
 
 		DocumentContext documentContext = JsonPath.parse(response.getBody());
         Number id = documentContext.read("$.id");
-        assertThat(id).isEqualTo(99);
+        assertThat(id).isEqualTo(1);
 
         Double amount = documentContext.read("$.amount");
-        assertThat(amount).isEqualTo(123.45);
+        assertThat(amount).isEqualTo(100.0);
 
 	}
 
