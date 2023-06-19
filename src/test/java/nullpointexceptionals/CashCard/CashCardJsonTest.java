@@ -15,6 +15,11 @@ public class CashCardJsonTest {
     @Autowired
     private JacksonTester<CashCard> json;
 
+    @Autowired
+    private JacksonTester<CashCard[]> jsonList;
+
+    private CashCard[] cashCards;
+
     @Test
     public void cashCardSerializationTest() throws IOException {
         CashCard cashCard = new CashCard(1L, 100.0, "Natalie");
@@ -46,6 +51,5 @@ public class CashCardJsonTest {
         assertThat(json.parseObject(expected).owner()).isEqualTo("Natalie");
     
     }
-
     
 }
