@@ -58,4 +58,14 @@ public class CashCardController {
       return ResponseEntity.ok(cashCards);
    }
 
+   @GetMapping("/owner/{owner}/{id}")
+   public ResponseEntity<CashCard> findByOwnerAndId(@PathVariable String owner, @PathVariable Long id) {
+      CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id);
+      if (cashCard != null) {
+         return ResponseEntity.ok(cashCard);
+      } else {
+         return ResponseEntity.notFound().build();
+      }
+   }
+
 }
