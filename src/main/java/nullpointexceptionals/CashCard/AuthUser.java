@@ -1,5 +1,7 @@
 package nullpointexceptionals.CashCard;
 
-public class AuthUser {
+import org.springframework.data.annotation.Id;
+
+public record AuthUser(@Id Long id, String name, Long cash_card_id) {
 
 }
