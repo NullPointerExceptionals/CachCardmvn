@@ -1,5 +1,7 @@
 package nullpointexceptionals.CashCard;
 
+import org.assertj.core.util.Arrays;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
@@ -19,6 +21,24 @@ public class CashCardJsonTest {
     private JacksonTester<CashCard[]> jsonList;
 
     private CashCard[] cashCards;
+
+    @BeforeEach
+    void setUp() {
+        cashCards = Arrays.array(
+            new CashCard( 1L,  100.0,  "Natalie"),
+            new CashCard( 2L,  200.0,  "Domiique"),
+            new CashCard( 3L,  300.0,  "Jeff"),
+            new CashCard( 4L, 400.0, "John"),
+            new CashCard( 5L, 500.0, "Tim"),
+            new CashCard( 6L, 600.0, "Mohamed"),
+            new CashCard( 7L, 200.0, "Natalie"),
+            new CashCard( 8L, 400.0, "Domiique"),
+            new CashCard( 9L, 600.0, "Jeff"),
+            new CashCard( 10L, 800.0, "John"),
+            new CashCard( 11L, 1000.0, "Tim"),
+            new CashCard( 12L, 1200.0, "Mohamed")
+        );
+    }
 
     @Test
     public void cashCardSerializationTest() throws IOException {
@@ -51,5 +71,12 @@ public class CashCardJsonTest {
         assertThat(json.parseObject(expected).owner()).isEqualTo("Natalie");
     
     }
+
+    @Test
+    void cashCardListSerializationTest() throws IOException {
+    assertThat(jsonList.write(cashCards)).isStrictlyEqualToJson("list.json");
+
+    }
+
     
 }
