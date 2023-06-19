@@ -25,8 +25,8 @@ public class CashCardJsonTest {
         assertThat(json.write(cashCard)).hasJsonPathNumberValue("@.amount");
         assertThat(json.write(cashCard)).extractingJsonPathNumberValue("@.amount")
              .isEqualTo(100.00);
-        assertThat(json.write(cashCard)).hasJsonPathNumberValue("@.owner");
-        assertThat(json.write(cashCard)).extractingJsonPathNumberValue("@.owner")
+        assertThat(json.write(cashCard)).hasJsonPathStringValue("@.owner");
+        assertThat(json.write(cashCard)).extractingJsonPathStringValue("@.owner")
              .isEqualTo("Natalie");
     }
 }
