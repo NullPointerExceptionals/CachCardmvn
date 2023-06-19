@@ -5,6 +5,14 @@ CREATE TABLE cash_card (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE auth_user (
+  id INT AUTO_INCREMENT,
+  name VARCHAR(255),
+  cash_card_id INT UNIQUE,
+  FOREIGN KEY (cash_card_id) REFERENCES cash_card(id),
+  PRIMARY KEY (id)
+);
+
 CREATE TABLE transaction (
   id INT AUTO_INCREMENT,
   cash_card_id INT,
