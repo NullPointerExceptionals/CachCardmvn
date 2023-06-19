@@ -53,11 +53,24 @@ public class CashCardController {
       return ResponseEntity.ok(cashCards);
    }
 
+   // Find by Owner and ID
    @GetMapping("/owner/{owner}/{id}")
    public ResponseEntity<CashCard> findByOwnerAndId(@PathVariable String owner, @PathVariable Long id) {
       CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id);
       if (cashCard != null) {
          return ResponseEntity.ok(cashCard);
+      } else {
+         return ResponseEntity.notFound().build();
+      }
+   }
+
+   // Delete by Owner and ID
+   @DeleteMapping("/owner/{owner}/{id}")
+   public ResponseEntity<?> deleteById(@PathVariable String owner, @PathVariable Long id) {
+      CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id);
+      if (cashCard != null) {
+         cashCardRepository.delete(cashCard);
+         return ResponseEntity.noContent().build();
       } else {
          return ResponseEntity.notFound().build();
       }
