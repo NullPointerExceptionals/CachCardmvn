@@ -2,16 +2,10 @@ package nullpointexceptionals.CashCard;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.security.Principal;
 
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 // import main.java.nullpointexceptionals.CashCard;
@@ -76,15 +70,15 @@ public class CashCardController {
       }
    }
 
-      // Update by Owner and ID
-    @PutMapping("/owner/{owner}/{id}")
-   public ResponseEntity<?> findByOwnerAndId(@PathVariable String owner, @PathVariable Long id, @RequestBody CashCard cashCardUpdate) {
+   // Update by Owner and ID
+   @PutMapping("/owner/{owner}/{id}")
+   public ResponseEntity<?> findByOwnerAndId(@PathVariable String owner, @PathVariable Long id,
+         @RequestBody CashCard cashCardUpdate) {
       CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id);
-      CashCard updatedCashCard = new CashCard(cashCard.owner(), cashCard.id(), cashCardUpdate.amount());
+      double updatedAmount = cashCard.amount() + cashCardUpdate.amount();
+      CashCard updatedCashCard = new CashCard(cashCard.id(), updatedAmount, cashCard.owner());
       cashCardRepository.save(updatedCashCard);
       return ResponseEntity.noContent().build();
    }
-
-   
 
 }
