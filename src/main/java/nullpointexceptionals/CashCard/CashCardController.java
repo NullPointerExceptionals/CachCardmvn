@@ -10,19 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import java.net.URI;
-
+import java.security.Principal;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
-
-
-import main.java.nullpointexceptionals.CashCard;
+// import main.java.nullpointexceptionals.CashCard;
 
 import java.util.List;
 import java.util.Optional;
-
-
 
 @RestController
 @RequestMapping("/cashcards")
@@ -59,7 +55,10 @@ public class CashCardController {
       return ResponseEntity.ok(cashCards);
    }
 
+<<<<<<< HEAD
    // Find by Owner and ID
+=======
+>>>>>>> 15c58b4 (Created findByOwner method)
    @GetMapping("/owner/{owner}/{id}")
    public ResponseEntity<CashCard> findByOwnerAndId(@PathVariable String owner, @PathVariable Long id) {
       CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id);
@@ -70,6 +69,7 @@ public class CashCardController {
       }
    }
 
+<<<<<<< HEAD
    // Delete by Owner and ID
    @DeleteMapping("/owner/{owner}/{id}")
    public ResponseEntity<?> deleteById(@PathVariable String owner, @PathVariable Long id) {
@@ -82,4 +82,6 @@ public class CashCardController {
       }
    }
 
+=======
+>>>>>>> 15c58b4 (Created findByOwner method)
 }
