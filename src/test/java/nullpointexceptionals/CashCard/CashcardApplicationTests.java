@@ -140,4 +140,23 @@ class CashcardApplicationTests {
 	
 	}
 
+	@Test
+	void shouldReturnAllTransactionsFromAnId() {
+		ResponseEntity<String> response = restTemplate.getForEntity("/1/transactions", String.class);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+		DocumentContext documentContext = JsonPath.parse(response.getBody());
+		int transactionCount = documentContext.read("$.length()");
+		assertThat(transactionCount).isEqualTo(2);
+
+		JSONArray ids = documentContext.read("$..id");
+		assertThat(ids).containsExactlyInAnyOrder(1, 4);
+
+		JSONArray cashCards = documentContext.read("$..cashCardId");
+		assertThat(cashCards).isEqualTo(1);
+
+		JSONArray amounts = documentContext.read("$.amountAdded");
+		assertThat(amounts).containsExactlyInAnyOrder(50.0, 500.0);
+	}
+
 }

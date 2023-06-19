@@ -1,0 +1,8 @@
+[
+    {"cash_card_id": 1, "amount_added": 50.0, "amount_removed": 0.0},
+    {"cash_card_id": 2, "amount_added": 0.0, "amount_removed": 25.0},
+    {"cash_card_id": 3, "amount_added": 75.0, "amount_removed": 0.0},
+    {"cash_card_id": 1, "amount_added": 500.0, "amount_removed": 0.0},
+    {"cash_card_id": 2, "amount_added": 0.0, "amount_removed": 250.0},
+    {"cash_card_id": 3, "amount_added": 750.0, "amount_removed": 0.0}
+]

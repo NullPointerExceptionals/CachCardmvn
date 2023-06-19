@@ -22,6 +22,8 @@ public class CashCardJsonTest {
 
     private CashCard[] cashCards;
 
+    
+
     @BeforeEach
     void setUp() {
         cashCards = Arrays.array(
