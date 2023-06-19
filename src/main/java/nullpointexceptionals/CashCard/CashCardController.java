@@ -101,7 +101,24 @@ public class CashCardController {
       return ResponseEntity.created(locationOfNewCashCard).build();
    }
 
-   // // TRANSACTIONS
+   // Auth user GET
+
+   @GetMapping("/authuser/{authuser}")
+   public ResponseEntity<CashCard> findCardByAuthUser(@PathVariable String authuser) {
+      AuthUser authUser = authUserRepository.findByName(authuser);
+      if (authUser != null) {
+         CashCard cashCard = cashCardRepository.findById(authUser.cash_card_id()).orElse(null);
+         if (cashCard != null) {
+            return ResponseEntity.ok(cashCard);
+         } else {
+            return ResponseEntity.notFound().build();
+         }
+      } else {
+         return ResponseEntity.notFound().build();
+      }
+   }
+
+   // TRANSACTIONS
 
    @GetMapping("/{id}/transactions")
    public ResponseEntity<List<Transaction>> getTransactionsByCashCardId(@PathVariable Long id) {
