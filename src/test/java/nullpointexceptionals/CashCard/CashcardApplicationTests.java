@@ -99,4 +99,16 @@ class CashcardApplicationTests {
 	
 	}
 
+    @Test
+	@DirtiesContext
+	void shouldDeleteAnExistingCashCard() {
+    	ResponseEntity<Void> response = restTemplate
+            .exchange("/cashcards/owner/Natalie/1", HttpMethod.DELETE, null, Void.class);
+    	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+		ResponseEntity<String> getResponse = restTemplate
+            .getForEntity("/cashcards/owner/Natalie/1", String.class);
+    	assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+	
+	}
+
 }
