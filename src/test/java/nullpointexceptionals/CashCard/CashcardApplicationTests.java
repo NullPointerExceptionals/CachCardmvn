@@ -38,6 +38,35 @@ class CashcardApplicationTests {
         assertThat(owner).isEqualTo("Natalie");
     }
 
+	@Test
+	void shouldReturnAllCashCardsByOwner() {
+		ResponseEntity<String> response = restTemplate.getForEntity("/cashcards/owner/Natalie", String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+		DocumentContext documentContext = JsonPath.parse(response.getBody());
+		int cashCardCount = documentContext.read("$.length()");
+		assertThat(cashCardCount).isEqualTo(2);
+
+		JSONArray ids = documentContext.read("$..id");
+		assertThat(ids).containsExactlyInAnyOrder(1, 7);
+
+		JSONArray amounts = documentContext.read("$..amount");
+		assertThat(amounts).containsExactlyInAnyOrder(100.0, 200.0);
+	}
+
+	@Test
+	void shouldReturnASingleCashCardByOwner() {
+		ResponseEntity<String> response = restTemplate.getForEntity("/cashcards/owner/Natalie/1", String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+		DocumentContext documentContext = JsonPath.parse(response.getBody());
+        Number id = documentContext.read("$.id");
+        assertThat(id).isEqualTo(1);
+
+        Double amount = documentContext.read("$.amount");
+        assertThat(amount).isEqualTo(100.0);
+	}
+
     @Test
     void shouldNotReturnACashCardWithAnUnknownId() {
         ResponseEntity<String> response = restTemplate.getForEntity("/cashcards/1000", String.class);
