@@ -43,6 +43,7 @@ public class CashCardController {
    }
 
    // Find all cards by owner
+   @CrossOrigin(origins = "http://localhost:3000")
    @GetMapping("/owner/{owner}")
    public ResponseEntity<List<CashCard>> getCashCardsByOwner(@PathVariable String owner) {
       List<CashCard> cashCards = cashCardRepository.findByOwner(owner);
