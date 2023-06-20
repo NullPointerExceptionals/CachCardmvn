@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CashcardApplicationTests {
     @Autowired
     TestRestTemplate restTemplate;
-
+ // Test mapping to get by requested ID only
 	@Test
     void shouldReturnACashCardWhenDataIsSaved() {
         ResponseEntity<String> response = restTemplate.getForEntity("/cashcards/1", String.class);
@@ -37,7 +37,7 @@ class CashcardApplicationTests {
         String owner = documentContext.read("$.owner");
         assertThat(owner).isEqualTo("Natalie");
     }
-
+// Find all cards by owner
 	@Test
 	void shouldReturnAllCashCardsByOwner() {
 		ResponseEntity<String> response = restTemplate.getForEntity("/cashcards/owner/Natalie", String.class);
@@ -53,7 +53,7 @@ class CashcardApplicationTests {
 		JSONArray amounts = documentContext.read("$..amount");
 		assertThat(amounts).containsExactlyInAnyOrder(100.0, 200.0);
 	}
-
+// Find by Owner and ID
 	@Test
 	void shouldReturnASingleCashCardByOwner() {
 		ResponseEntity<String> response = restTemplate.getForEntity("/cashcards/owner/Natalie/1", String.class);
@@ -74,7 +74,7 @@ class CashcardApplicationTests {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(response.getBody()).isBlank();
     }
-
+   // Create by Owner
     @Test
     @DirtiesContext
     void shouldCreateANewCashCard() {
@@ -96,7 +96,7 @@ class CashcardApplicationTests {
         assertThat(owner).isEqualTo("Nathan");
    
 	}
-
+   // Update by Owner and ID
     @Test
 	@DirtiesContext
 	void shouldUpdateAnExistingCashCard() {
@@ -127,7 +127,7 @@ class CashcardApplicationTests {
     	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
 	
 	}
-
+   // Delete by Owner and ID
     @Test
 	@DirtiesContext
 	void shouldDeleteAnExistingCashCard() {
@@ -139,7 +139,7 @@ class CashcardApplicationTests {
     	assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
 	
 	}
-
+   // TRANSACTIONS
 	@Test
 	void shouldReturnAllTransactionsFromAnId() {
 		ResponseEntity<String> response = restTemplate.getForEntity("/1/transactions", String.class);
@@ -158,5 +158,17 @@ class CashcardApplicationTests {
 		JSONArray amounts = documentContext.read("$.amountAdded");
 		assertThat(amounts).containsExactlyInAnyOrder(50.0, 500.0);
 	}
+   // Auth user GET
+   @Test
+	void shouldReturnASingleCashCardByAuthUser() {
+		ResponseEntity<String> response = restTemplate.getForEntity("/authuser/Alice", String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
+		DocumentContext documentContext = JsonPath.parse(response.getBody());
+        Number id = documentContext.read("$.id");
+        assertThat(id).isEqualTo(1);
+
+        Double amount = documentContext.read("$.amount");
+        assertThat(amount).isEqualTo(100.0);
+	}
 }
