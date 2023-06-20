@@ -1,6 +1,6 @@
 {
     "id": 1,
-    "cash_card_id": 1,
-    "amount_added": 50.0,
-    "amount_removed": 0.0
+    "cashCardId": 1,
+    "amountAdded": 50.0,
+    "amountRemoved": 0.0
 }

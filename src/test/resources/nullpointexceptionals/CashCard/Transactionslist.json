@@ -1,8 +1,8 @@
 [
-    {"id": 1, "cash_card_id": 1, "amount_added": 50.0, "amount_removed": 0.0},
-    {"id": 2, "cash_card_id": 2, "amount_added": 0.0, "amount_removed": 25.0},
-    {"id": 3, "cash_card_id": 3, "amount_added": 75.0, "amount_removed": 0.0},
-    {"id": 4, "cash_card_id": 1, "amount_added": 500.0, "amount_removed": 0.0},
-    {"id": 5, "cash_card_id": 2, "amount_added": 0.0, "amount_removed": 250.0},
-    {"id": 6, "cash_card_id": 3,  "amount_added": 750.0, "amount_removed": 0.0}
+    {"id": 1, "cashCardId": 1, "amountAdded": 50.0, "amountRemoved": 0.0},
+    {"id": 2, "cashCardId": 2, "amountAdded": 0.0, "amountRemoved": 25.0},
+    {"id": 3, "cashCardId": 3, "amountAdded": 75.0, "amountRemoved": 0.0},
+    {"id": 4, "cashCardId": 1, "amountAdded": 500.0, "amountRemoved": 0.0},
+    {"id": 5, "cashCardId": 2, "amountAdded": 0.0, "amountRemoved": 250.0},
+    {"id": 6, "cashCardId": 3,  "amountAdded": 750.0, "amountRemoved": 0.0}
 ]
