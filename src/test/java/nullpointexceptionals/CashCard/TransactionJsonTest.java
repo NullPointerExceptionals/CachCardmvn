@@ -26,10 +26,10 @@ public class TransactionJsonTest {
     void setUp() {
         transactions = Arrays.array(
             new Transaction(1L, 1L, 50.0, 0.0),
-            new Transaction(4L, 1L, 500.0, 0.0),
             new Transaction(2L, 2L, 0.0, 25.0),
-            new Transaction(5L, 2L, 0.0, 250.0),
             new Transaction(3L, 3L, 75.0, 0.0),
+            new Transaction(4L, 1L, 500.0, 0.0),
+            new Transaction(5L, 2L, 0.0, 250.0),
             new Transaction(6L, 3L, 750.0, 0.0)
         );
     }
@@ -68,6 +68,11 @@ public class TransactionJsonTest {
         assertThat(json.parseObject(expected).amountAdded()).isEqualTo(50.0);
         assertThat(json.parseObject(expected).amountRemoved()).isEqualTo(0.0);
 
+    }
+
+    @Test
+    void transactionListSerializationTest() throws IOException {
+        assertThat(jsonList.write(transactions)).isStrictlyEqualToJson("transactionslist.json");
     }
     
 }
