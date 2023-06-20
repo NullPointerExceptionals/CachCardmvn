@@ -18,10 +18,13 @@ import java.util.Optional;
 public class CashCardController {
    private CashCardRepository cashCardRepository;
    private final TransactionRepository transactionRepository;
+   private AuthUserRepository authUserRepository;
 
-   public CashCardController(CashCardRepository cashCardRepository, TransactionRepository transactionRepository) {
+   public CashCardController(CashCardRepository cashCardRepository, TransactionRepository transactionRepository,
+         AuthUserRepository authUserRepository) {
       this.cashCardRepository = cashCardRepository;
       this.transactionRepository = transactionRepository;
+      this.authUserRepository = authUserRepository;
    }
 
    private CashCard findCashCard(Long requestedId) {
@@ -78,29 +81,44 @@ public class CashCardController {
          @RequestBody CashCard cashCardUpdate) {
       CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id);
       if (cashCard != null) {
-      double updatedAmount = cashCard.amount() + cashCardUpdate.amount();
-      CashCard updatedCashCard = new CashCard(cashCard.id(), updatedAmount, cashCard.owner());
-      cashCardRepository.save(updatedCashCard);
-      return ResponseEntity.noContent().build();
+         double updatedAmount = cashCard.amount() + cashCardUpdate.amount();
+         CashCard updatedCashCard = new CashCard(cashCard.id(), updatedAmount, cashCard.owner());
+         cashCardRepository.save(updatedCashCard);
+         return ResponseEntity.noContent().build();
       } else {
          return ResponseEntity.notFound().build();
+      }
    }
-}
 
-   //Create by Owner
-       @PostMapping
+   // Create by Owner
+   @PostMapping
    public ResponseEntity<?> createCashCard(@RequestBody CashCard newCashCardRequest, UriComponentsBuilder ucb) {
-   CashCard savedCashCard = cashCardRepository.save(newCashCardRequest);
-   URI locationOfNewCashCard = ucb
+      CashCard savedCashCard = cashCardRepository.save(newCashCardRequest);
+      URI locationOfNewCashCard = ucb
             .path("/owner/{owner}")
             .buildAndExpand(savedCashCard.id())
             .toUri();
-   return ResponseEntity.created(locationOfNewCashCard).build();
-}
+      return ResponseEntity.created(locationOfNewCashCard).build();
+   }
 
-   
+   // Auth user GET
 
-   // // TRANSACTIONS
+   @GetMapping("/authuser/{authuser}")
+   public ResponseEntity<CashCard> findCardByAuthUser(@PathVariable String authuser) {
+      AuthUser authUser = authUserRepository.findByName(authuser);
+      if (authUser != null) {
+         CashCard cashCard = cashCardRepository.findById(authUser.cash_card_id()).orElse(null);
+         if (cashCard != null) {
+            return ResponseEntity.ok(cashCard);
+         } else {
+            return ResponseEntity.notFound().build();
+         }
+      } else {
+         return ResponseEntity.notFound().build();
+      }
+   }
+
+   // TRANSACTIONS
 
    @GetMapping("/{id}/transactions")
    public ResponseEntity<List<Transaction>> getTransactionsByCashCardId(@PathVariable Long id) {
