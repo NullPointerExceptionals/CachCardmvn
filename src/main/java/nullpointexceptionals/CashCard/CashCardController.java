@@ -69,6 +69,16 @@ public class CashCardController {
    public ResponseEntity<?> deleteById(@PathVariable String owner, @PathVariable Long id) {
       CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id);
       if (cashCard != null) {
+         List<Transaction> transactions = transactionRepository.findByCashCardId(cashCard.id());
+         for (Transaction transaction : transactions) {
+            transactionRepository.delete(transaction);
+         }
+
+         AuthUser authUser = authUserRepository.findByCashCardId(cashCard.id());
+         if (authUser != null) {
+            authUserRepository.delete(authUser);
+         }
+
          cashCardRepository.delete(cashCard);
          return ResponseEntity.noContent().build();
       } else {
@@ -108,7 +118,7 @@ public class CashCardController {
    public ResponseEntity<CashCard> findCardByAuthUser(@PathVariable String authuser) {
       AuthUser authUser = authUserRepository.findByName(authuser);
       if (authUser != null) {
-         CashCard cashCard = cashCardRepository.findById(authUser.cash_card_id()).orElse(null);
+         CashCard cashCard = cashCardRepository.findById(authUser.cashCardId()).orElse(null);
          if (cashCard != null) {
             return ResponseEntity.ok(cashCard);
          } else {
