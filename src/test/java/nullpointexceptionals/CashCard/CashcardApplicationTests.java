@@ -79,7 +79,7 @@ class CashcardApplicationTests {
     @DirtiesContext
     void shouldCreateANewCashCard() {
         CashCard newCashCard = new CashCard(null, 250.00, null);
-        ResponseEntity<Void> createResponse = restTemplate.postForEntity("/owner/Nathan", newCashCard, Void.class);
+        ResponseEntity<Void> createResponse = restTemplate.postForEntity("/cashcards/owner/Nathan", newCashCard, Void.class);
         assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
         URI locationOfNewCashCard = createResponse.getHeaders().getLocation();
@@ -139,6 +139,18 @@ class CashcardApplicationTests {
     	assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
 	
 	}
+	@Test
+	void shouldNotDeleteACashCardUsingIncorrectOwner() {
+		ResponseEntity<Void> response = restTemplate
+            .exchange("/cashcards/owner/Fake/1", HttpMethod.DELETE, null, Void.class);
+    	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+	}
+	@Test
+	void shouldNotDeleteACashCardThatDoesNotExist() {
+		ResponseEntity<Void> response = restTemplate
+            .exchange("/cashcards/owner/Natalie/1000", HttpMethod.DELETE, null, Void.class);
+    	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+	}
    // TRANSACTIONS
 	@Test
 	void shouldReturnAllTransactionsFromAnId() {
@@ -185,7 +197,7 @@ class CashcardApplicationTests {
 
 	@Test
     void shouldNotReturnACashCardWithAnUnknownAuthUser() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/authuser/Fake", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/cashcards/authuser/Fake", String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
    
