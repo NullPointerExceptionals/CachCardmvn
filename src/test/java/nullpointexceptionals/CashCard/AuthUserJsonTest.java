@@ -73,5 +73,26 @@ public class AuthUserJsonTest {
     void authorizedUsersListSerializationTest() throws IOException {
         assertThat(jsonList.write(authUsers)).isStrictlyEqualToJson("authuserslist.json");
     }
+
+    @Test
+    void authorizedUsersListDeserializationTest() throws IOException {
+        String expected = """
+                {
+                    {"id": 1, "name": "Alice", "cashCardId": 1},
+                    {"id": 2, "name": "Bob", "cashCardId": 2},
+                    {"id": 3, "name": "Charlie", "cashCardId": 3},
+                    {"id": 4, "name": "David", "cashCardId": 4},
+                    {"id": 5, "name": "Eve", "cashCardId": 5},
+                    {"id": 6, "name": "Frank", "cashCardId": 6},
+                    {"id": 7, "name": "Grace", "cashCardId": 7},
+                    {"id": 8, "name": "Henry", "cashCardId": 8},
+                    {"id": 9, "name": "Isabella", "cashCardId": 9},
+                    {"id": 10, "name": "Jack", "cashCardId": 10},
+                    {"id": 11, "name": "Kate", "cashCardId": 11},
+                    {"id": 12, "name": "Liam", "cashCardId": 12}
+                }
+                """;
+        assertThat(jsonList.parse(expected)).isEqualTo(authUsers);   
+    }
 }
 
