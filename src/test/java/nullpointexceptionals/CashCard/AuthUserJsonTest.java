@@ -56,7 +56,17 @@ public class AuthUserJsonTest {
 
     @Test
     public void authorisedUserDeserializationTest() throws IOException {
-
+        String expected = """
+                {
+                    "id": 1,
+                    "name": "Alice",
+                    "cashCardId": 1
+                }
+                """;
+        assertThat(json.parse(expected)).isEqualTo(new AuthUser(1L, "Alice", 1L));
+        assertThat(json.parseObject(expected).id()).isEqualTo(1);
+        assertThat(json.parseObject(expected).name()).isEqualTo("Alice");       
+        assertThat(json.parseObject(expected).cashCardId()).isEqualTo(1);
     }
 }
 
