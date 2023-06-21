@@ -43,6 +43,15 @@ public class AuthUserJsonTest {
     public void authorizedUserSerializationTest() throws IOException {
         AuthUser authUser = authUsers[0];
         assertThat(json.write(authUser)).isStrictlyEqualToJson("authuser.json");
+        assertThat(json.write(authUser)).hasJsonPathNumberValue("@.id");
+        assertThat(json.write(authUser)).extractingJsonPathNumberValue("@.id")
+        .isEqualTo(1);
+        assertThat(json.write(authUser)).hasJsonPathStringValue("@.name");
+        assertThat(json.write(authUser)).extractingJsonPathStringValue("@.name")
+        .isEqualTo("Alice");
+        assertThat(json.write(authUser)).hasJsonPathNumberValue("@.cashCardId");
+        assertThat(json.write(authUser)).extractingJsonPathNumberValue("@.cashCardId")
+        .isEqualTo(1);
     }
 }
 
