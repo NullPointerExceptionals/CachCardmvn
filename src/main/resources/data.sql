@@ -26,51 +26,40 @@ INSERT INTO auth_user (name, cash_card_id) VALUES ('Kate', 11);
 INSERT INTO auth_user (name, cash_card_id) VALUES ('Liam', 12);
 
 
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (1, 25.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (1, 0.0, 15.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (1, 10.0, 0.0);
-
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (2, 50.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (2, 0.0, 10.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (2, 15.0, 0.0);
-
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (3, 30.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (3, 0.0, 20.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (3, 25.0, 0.0);
-
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (4, 15.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (4, 0.0, 5.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (4, 20.0, 0.0);
-
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (5, 40.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (5, 0.0, 10.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (5, 5.0, 0.0);
-
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (6, 20.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (6, 0.0, 10.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (6, 15.0, 0.0);
-
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (7, 25.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (7, 0.0, 15.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (7, 10.0, 0.0);
-
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (8, 50.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (8, 0.0, 25.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (8, 15.0, 0.0);
-
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (9, 10.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (9, 0.0, 5.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (9, 25.0, 0.0);
-
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (10, 45.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (10, 0.0, 20.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (10, 50.0, 0.0);
-
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (11, 30.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (11, 0.0, 30.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (11, 25.0, 0.0);
-
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (12, 35.0, 0.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (12, 0.0, 25.0);
-INSERT INTO transaction (cash_card_id, amount_added, amount_removed) VALUES (12, 20.0, 0.0);
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (1, 0.0, 15.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (1, 25.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (1, 10.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (2, 50.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (2, 0.0, 10.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (2, 15.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (3, 30.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (3, 0.0, 20.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (3, 25.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (4, 15.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (4, 0.0, 35.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (4, 20.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (5, 40.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (5, 0.0, 10.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (5, 25.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (6, 20.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (6, 0.0, 10.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (6, 15.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (7, 25.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (7, 0.0, 15.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (7, 10.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (8, 50.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (8, 0.0, 25.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (8, 15.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (9, 10.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (9, 0.0, 10.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (9, 25.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (10, 45.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (10, 0.0, 20.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (10, 50.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (11, 30.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (11, 0.0, 30.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (11, 25.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (12, 35.0, 0.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (12, 0.0, 25.0, NOW());
+INSERT INTO transaction (cash_card_id, amount_added, amount_removed, date_created) VALUES (12, 20.0, 0.0, NOW());
 

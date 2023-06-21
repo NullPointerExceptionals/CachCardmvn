@@ -1,35 +1,34 @@
 import React, { useState } from "react";
 import { CardsView } from "./CardsView";
+import fetchCardsData from "../util/fetchCards";
 
 export const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [cardsData, setCardsData] = useState([]);
   const [loginRender, setLoginRender] = useState(false);
+  const [errorMessage, setErrorMessag] = useState(false);
 
   async function handleSubmit(e) {
-    e.preventDefault();
-
-    console.log(username);
-
-    const response = await fetch(
-      `http://localhost:8080/cashcards/owner/${username}`
-    );
-
-    const data = await response.json();
-
-    setCardsData(data);
-    console.log(data);
-    console.log("cardsData:" + cardsData);
-    setLoginRender(true);
+    try {
+      e.preventDefault();
+      await fetchCardsData(username, setCardsData);
+      setLoginRender(true);
+    } catch (err) {
+      setErrorMessag(true);
+    }
   }
 
   return (
     <>
       {loginRender ? (
-        <CardsView cardsData={cardsData} />
+        <CardsView
+          cardsData={cardsData}
+          setLoginRender={setLoginRender}
+          setCardsData={setCardsData}
+        />
       ) : (
         <div className="login">
-          <p>Login</p>
+          <h1>Login</h1>
           <form>
             <input
               className="username"
@@ -38,9 +37,18 @@ export const LoginPage = () => {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter your username"
             ></input>
+            {/*Password style input for demo purposes */}
+            <input
+              type="text"
+              className="hideText"
+              placeholder="Enter your password"
+            ></input>
             <br></br>
             <button onClick={handleSubmit}>Take me to my cards</button>
           </form>
+          {errorMessage ? (
+            <p className="loginError">username or password incorrect</p>
+          ) : null}
         </div>
       )}
     </>

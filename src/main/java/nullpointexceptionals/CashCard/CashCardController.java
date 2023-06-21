@@ -13,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/cashcards")
 public class CashCardController {
@@ -43,7 +44,7 @@ public class CashCardController {
    }
 
    // Find all cards by owner
-   @CrossOrigin(origins = "http://localhost:3000")
+
    @GetMapping("/owner/{owner}")
    public ResponseEntity<List<CashCard>> getCashCardsByOwner(@PathVariable String owner) {
       List<CashCard> cashCards = cashCardRepository.findByOwner(owner);
@@ -54,6 +55,7 @@ public class CashCardController {
    }
 
    // Find by Owner and ID
+
    @GetMapping("/owner/{owner}/{id}")
    public ResponseEntity<CashCard> findByOwnerAndId(@PathVariable String owner, @PathVariable Long id) {
       CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id);
@@ -64,7 +66,7 @@ public class CashCardController {
       }
    }
 
-   // Delete by Owner and ID
+   // Delete by Owner and ID Deletes Transactions
    @DeleteMapping("/owner/{owner}/{id}")
    public ResponseEntity<?> deleteById(@PathVariable String owner, @PathVariable Long id) {
       CashCard cashCard = cashCardRepository.findByOwnerAndId(owner, id);
@@ -112,8 +114,7 @@ public class CashCardController {
       return ResponseEntity.created(locationOfNewCashCard).build();
    }
 
-   // Auth user GET
-
+   // Auth user GET by name
    @GetMapping("/authuser/{authuser}")
    public ResponseEntity<CashCard> findCardByAuthUser(@PathVariable String authuser) {
       AuthUser authUser = authUserRepository.findByName(authuser);
@@ -124,6 +125,17 @@ public class CashCardController {
          } else {
             return ResponseEntity.notFound().build();
          }
+      } else {
+         return ResponseEntity.notFound().build();
+      }
+   }
+
+   // Auth user GET by cash card id
+   @GetMapping("/authuser/id/{id}")
+   public ResponseEntity<AuthUser> findAuthUserByCashCardId(@PathVariable Long id) {
+      AuthUser authUser = authUserRepository.findByCashCardId(id);
+      if (authUser != null) {
+         return ResponseEntity.ok(authUser);
       } else {
          return ResponseEntity.notFound().build();
       }
