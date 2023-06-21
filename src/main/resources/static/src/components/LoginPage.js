@@ -6,7 +6,7 @@ export const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [cardsData, setCardsData] = useState([]);
   const [loginRender, setLoginRender] = useState(false);
-  const [errorMessage, setErrorMessag] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   async function handleSubmit(e) {
     try {
@@ -14,7 +14,7 @@ export const LoginPage = () => {
       await fetchCardsData(username, setCardsData);
       setLoginRender(true);
     } catch (err) {
-      setErrorMessag(true);
+      setErrorMessage(true);
     }
   }
 
