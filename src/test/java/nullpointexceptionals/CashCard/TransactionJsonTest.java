@@ -50,6 +50,8 @@ public class TransactionJsonTest {
         assertThat(json.write(transaction)).hasJsonPathNumberValue("@.amountRemoved");
         assertThat(json.write(transaction)).extractingJsonPathNumberValue("@.amountRemoved")
         .isEqualTo(0.0);
+        assertThat(json.write(transaction)).hasJsonPath("@.dateCreated");
+        
     }
 
     @Test
@@ -68,6 +70,7 @@ public class TransactionJsonTest {
         assertThat(json.parseObject(expected).cashCardId()).isEqualTo(1);
         assertThat(json.parseObject(expected).amountAdded()).isEqualTo(50.0);
         assertThat(json.parseObject(expected).amountRemoved()).isEqualTo(0.0);
+        assertThat(json.parseObject(expected).dateCreated()).isNull();
 
     }
 
