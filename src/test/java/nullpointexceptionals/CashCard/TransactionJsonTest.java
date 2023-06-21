@@ -75,5 +75,21 @@ public class TransactionJsonTest {
     void transactionListSerializationTest() throws IOException {
         assertThat(jsonList.write(transactions)).isStrictlyEqualToJson("transactionslist.json");
     }
+
+    @Test
+    void transactionsListDeserializationTest() throws IOException {
+    String expected="""
+         [
+            {"id": 1, "cashCardId": 1, "amountAdded": 50.0, "amountRemoved": 0.0, "dateCreated": null},
+            {"id": 2, "cashCardId": 2, "amountAdded": 0.0, "amountRemoved": 25.0, "dateCreated": null},
+            {"id": 3, "cashCardId": 3, "amountAdded": 75.0, "amountRemoved": 0.0, "dateCreated": null},
+            {"id": 4, "cashCardId": 1, "amountAdded": 500.0, "amountRemoved": 0.0, "dateCreated": null},
+            {"id": 5, "cashCardId": 2, "amountAdded": 0.0, "amountRemoved": 250.0, "dateCreated": null},
+            {"id": 6, "cashCardId": 3, "amountAdded": 750.0, "amountRemoved": 0.0, "dateCreated": null}
+         ]
+         """;
+    assertThat(jsonList.parse(expected)).isEqualTo(transactions);
+
+    }
     
 }
