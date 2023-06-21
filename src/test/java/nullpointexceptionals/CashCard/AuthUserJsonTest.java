@@ -38,5 +38,11 @@ public class AuthUserJsonTest {
             new AuthUser(12L, "Liam", 12L)
         );
     }
+
+    @Test
+    public void authorizedUserSerializationTest() throws IOException {
+        AuthUser authUser = authUsers[0];
+        assertThat(json.write(authUser)).isStrictlyEqualToJson("authuser.json");
+    }
 }
 
