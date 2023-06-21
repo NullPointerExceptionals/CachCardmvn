@@ -77,7 +77,7 @@ public class AuthUserJsonTest {
     @Test
     void authorizedUsersListDeserializationTest() throws IOException {
         String expected = """
-                {
+                [
                     {"id": 1, "name": "Alice", "cashCardId": 1},
                     {"id": 2, "name": "Bob", "cashCardId": 2},
                     {"id": 3, "name": "Charlie", "cashCardId": 3},
@@ -90,7 +90,7 @@ public class AuthUserJsonTest {
                     {"id": 10, "name": "Jack", "cashCardId": 10},
                     {"id": 11, "name": "Kate", "cashCardId": 11},
                     {"id": 12, "name": "Liam", "cashCardId": 12}
-                }
+                ]
                 """;
         assertThat(jsonList.parse(expected)).isEqualTo(authUsers);   
     }
