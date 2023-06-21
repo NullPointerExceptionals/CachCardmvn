@@ -53,5 +53,10 @@ public class AuthUserJsonTest {
         assertThat(json.write(authUser)).extractingJsonPathNumberValue("@.cashCardId")
         .isEqualTo(1);
     }
+
+    @Test
+    public void authorisedUserDeserializationTest() throws IOException {
+
+    }
 }
 
