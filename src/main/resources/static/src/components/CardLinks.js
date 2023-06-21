@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import fetchAuthUser from "../util/fetchAuthUser";
 
-export const CardLinks = ({ card: { id, owner, amount } }) => {
+export const CardLinks = ({ card: { id, owner, amount }, renderCard }) => {
+  const [authUser, setAuthUser] = useState({});
+
+  useEffect(() => {
+    fetchAuthUser(id, setAuthUser);
+  }, []);
+
   return (
     <>
-      <h3>
-        <div className="cardsLinks">
-          <div className="Owner">{owner}</div>
-          <div className="Owner">£{amount}</div>
-          <div className="Owner">{id}</div>
-        </div>
-      </h3>
+      <div className="cardBody" onClick={() => renderCard(id)}>
+        <p className="authUserName">{authUser.name}'s Card</p>
+        <p className="ammount">£{amount}</p>
+        <p className="cardNumber">5784 XXXX XXXX 000{id}</p>
+      </div>
     </>
   );
 };

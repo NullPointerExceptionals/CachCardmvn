@@ -1,3 +1,19 @@
+html {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(245, 252, 255, 1) 72%,
+    rgba(155, 228, 255, 1) 150%
+  );
+
+  min-height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
 .App {
   text-align: center;
 }
@@ -6,21 +22,99 @@
   margin: 1rem;
 }
 
-.cardsList {
+.loginError {
+  color: rgb(77, 77, 77);
+  font-weight: 200;
+}
+
+.cardsContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.cardsLinks {
-  padding: 4rem 8rem;
+.cardBody,
+.cardBodySingle {
+  padding: 3rem 6rem;
+  margin: 2rem;
   border-radius: 1rem;
-  background: rgb(224, 244, 255);
+  background: rgb(255, 255, 255);
   background: linear-gradient(
     0deg,
-    rgba(224, 244, 255, 1) 0%,
-    rgba(106, 201, 255, 1) 100%
+    rgba(255, 255, 255, 1) 0%,
+    rgba(245, 252, 255, 1) 48%,
+    rgba(83, 209, 255, 1) 150%
   );
   box-shadow: 10px 5px 5px rgb(213, 213, 213);
+}
+
+.cardBody:hover {
+  background-color: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(245, 252, 255, 1) 48%,
+    rgb(61, 203, 255) 150%
+  );
+  box-shadow: 10px 5px 10px rgb(157, 157, 157);
+  transition: box-shadow 1s;
+  cursor: pointer;
+}
+
+input {
+  border-radius: 5rem;
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  border: 0.1rem solid #96e3ff;
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: #96e3ff;
+  border-radius: 5rem;
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  box-shadow: 5px 2px 3px rgb(213, 213, 213);
+  transition: box-shadow 1s;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  background: #85dfff;
+  box-shadow: 5px 2px 3px rgb(170, 170, 170);
+}
+
+.authUserName {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.cardNumber {
+  font-weight: 100;
+}
+
+.hideText {
+  -webkit-text-security: disc;
+  font-family: dotsfont;
+  font-family: inherit;
+}
+
+.transactions {
+  background-color: #85deff13;
+  width: 60%;
+  padding: 1rem;
+  margin: 1rem 1rem 4rem 1rem;
+  border-radius: 1rem;
+}
+
+.transactionSpace {
+  margin: 1rem;
+}
+.invTransactions {
+  padding: 0.5rem 0;
 }
 
 /* .App-logo {
