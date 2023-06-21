@@ -34,7 +34,7 @@ public class AuthUserJsonTest {
             new AuthUser(8L, "Henry", 8L),
             new AuthUser(9L, "Isabella", 9L),
             new AuthUser(10L, "Jack", 10L),
-            new AuthUser(11L, "Kate", 10L),
+            new AuthUser(11L, "Kate", 11L),
             new AuthUser(12L, "Liam", 12L)
         );
     }
@@ -67,6 +67,11 @@ public class AuthUserJsonTest {
         assertThat(json.parseObject(expected).id()).isEqualTo(1);
         assertThat(json.parseObject(expected).name()).isEqualTo("Alice");       
         assertThat(json.parseObject(expected).cashCardId()).isEqualTo(1);
+    }
+
+    @Test
+    void authorizedUsersListSerializationTest() throws IOException {
+        assertThat(jsonList.write(authUsers)).isStrictlyEqualToJson("authuserslist.json");
     }
 }
 
