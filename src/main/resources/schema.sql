@@ -18,6 +18,7 @@ CREATE TABLE transaction (
   cash_card_id INT,
   amount_added DOUBLE,
   amount_removed DOUBLE,
+  date_created TIMESTAMP,
   FOREIGN KEY (cash_card_id) REFERENCES cash_card(id),
   PRIMARY KEY (id)
 );
