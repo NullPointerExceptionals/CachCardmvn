@@ -28,7 +28,7 @@ export const LoginPage = () => {
         />
       ) : (
         <div className="login">
-          <h1>Login</h1>
+          <h1 className="loginTitle">Login</h1>
           <form>
             <input
               className="username"
