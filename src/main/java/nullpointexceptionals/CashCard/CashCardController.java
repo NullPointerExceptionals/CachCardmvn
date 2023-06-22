@@ -1,18 +1,12 @@
 package nullpointexceptionals.CashCard;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
-import java.security.Principal;
 import java.time.LocalDateTime;
-
 import org.springframework.web.util.UriComponentsBuilder;
 
-// import main.java.nullpointexceptionals.CashCard;
-
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
