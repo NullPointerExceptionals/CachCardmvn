@@ -13,13 +13,13 @@ export const DeleteCard = ({
       await fetch(`http://localhost:8080/cashcards/owner/${owner}/${id}`, {
         method: "DELETE",
       });
-      fetchCardsData(owner, setCardsData);
+      fetchCardsData(owner, setCardsData).then(() => {
+        setSingleCardRender(false);
+      });
     } catch (error) {
       console.error(error);
     }
   };
-
-  //   setSingleCardRender(false)
 
   return (
     <div>

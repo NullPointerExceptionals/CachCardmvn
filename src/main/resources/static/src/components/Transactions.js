@@ -2,15 +2,18 @@ import React, { useState, useEffect } from "react";
 
 export const Transactions = ({ id }) => {
   const [transactions, setTransactions] = useState([]);
-  const [transactionsDate, setTransactionsDate] = useState("");
-  const [transactionsTime, setTransactionsTime] = useState("");
+  const [noTransactions, setNoTransactions] = useState(false);
 
   async function fetchTransactions(id) {
-    const response = await fetch(
-      `http://localhost:8080/cashcards/${id}/transactions`
-    );
-    const transactionsData = await response.json();
-    setTransactions(transactionsData);
+    try {
+      const response = await fetch(
+        `http://localhost:8080/cashcards/${id}/transactions`
+      );
+      const transactionsData = await response.json();
+      setTransactions(transactionsData);
+    } catch {
+      setNoTransactions(true);
+    }
   }
 
   useEffect(() => {
@@ -28,6 +31,7 @@ export const Transactions = ({ id }) => {
   return (
     <div className="transactions">
       <h3>Transactions</h3>
+      {noTransactions ? <p>No transactions to view</p> : null}
       {transactions.map((transaction, idx) => {
         return (
           <div key={idx} className="invTransactions">

@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { CardsList } from "./CardsList";
 import { SingleCard } from "./SingleCard";
+import { AddCard } from "./AddCard";
 
 export const CardsView = ({ cardsData, setLoginRender, setCardsData }) => {
   const [singleCardRender, setSingleCardRender] = useState(false);
+  const [addCardRender, setAddCardRender] = useState(false);
   const [singleCard, setSingleCard] = useState({});
+
+  const owner = cardsData[0].owner;
 
   async function renderCard(id) {
     try {
       const response = await fetch(
-        `http://localhost:8080/cashcards/owner/${cardsData[0].owner}/${id}`
+        `http://localhost:8080/cashcards/owner/${owner}/${id}`
       );
       const cardData = await response.json();
 
@@ -22,10 +26,17 @@ export const CardsView = ({ cardsData, setLoginRender, setCardsData }) => {
 
   return (
     <div>
-      <h2 className="ownerTitle">{cardsData[0].owner}'s Cash Cards</h2>
+      <h2 className="ownerTitle">{owner}'s Cash Cards</h2>
       <button onClick={() => setLoginRender(false)}>Log Out</button>
-      <button>Add Card</button>
-
+      <button onClick={setAddCardRender}>Add Card</button>
+      {addCardRender ? (
+        <AddCard
+          cardsData={cardsData}
+          setCardsData={setCardsData}
+          setAddCardRender={setAddCardRender}
+          setSingleCardRender={setSingleCardRender}
+        />
+      ) : null}
       <div className="cardsContainer">
         {singleCardRender ? (
           <SingleCard

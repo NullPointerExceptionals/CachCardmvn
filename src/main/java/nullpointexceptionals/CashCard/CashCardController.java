@@ -1,17 +1,12 @@
 package nullpointexceptionals.CashCard;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
-import java.security.Principal;
-
+import java.time.LocalDateTime;
 import org.springframework.web.util.UriComponentsBuilder;
 
-// import main.java.nullpointexceptionals.CashCard;
-
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -97,13 +92,25 @@ public class CashCardController {
          double updatedAmount = cashCard.amount() + cashCardUpdate.amount();
          CashCard updatedCashCard = new CashCard(cashCard.id(), updatedAmount, cashCard.owner());
          cashCardRepository.save(updatedCashCard);
+
+         double amountAdded = 0;
+         double amountRemoved = 0;
+         if (cashCardUpdate.amount() > 0) {
+            amountAdded = cashCardUpdate.amount();
+         } else if (cashCardUpdate.amount() < 0) {
+            amountRemoved = Math.abs(cashCardUpdate.amount());
+         }
+         LocalDateTime dateCreated = LocalDateTime.now();
+         Transaction transaction = new Transaction(null, cashCard.id(), amountAdded, amountRemoved, dateCreated);
+         transactionRepository.save(transaction);
+
          return ResponseEntity.noContent().build();
       } else {
          return ResponseEntity.notFound().build();
       }
    }
 
-   // Create by Owner
+   // Create CashCard
    @PostMapping
    public ResponseEntity<?> createCashCard(@RequestBody CashCard newCashCardRequest, UriComponentsBuilder ucb) {
       CashCard savedCashCard = cashCardRepository.save(newCashCardRequest);
@@ -111,7 +118,19 @@ public class CashCardController {
             .path("/owner/{owner}")
             .buildAndExpand(savedCashCard.id())
             .toUri();
-      return ResponseEntity.created(locationOfNewCashCard).build();
+      return ResponseEntity.created(locationOfNewCashCard)
+            .body("{\"id\": \"" + savedCashCard.id() + "\"}");
+   }
+
+   // Create AuthUser
+   @PostMapping("/authuser")
+   public ResponseEntity<?> createAuthUser(@RequestBody AuthUser newAuthUserRequest, UriComponentsBuilder ucb) {
+      AuthUser savedAuthUser = authUserRepository.save(newAuthUserRequest);
+      URI locationOfNewAuthUser = ucb
+            .path("/authuser/{authuser}")
+            .buildAndExpand(savedAuthUser.id())
+            .toUri();
+      return ResponseEntity.created(locationOfNewAuthUser).build();
    }
 
    // Auth user GET by name
