@@ -116,7 +116,7 @@ public class CashCardController {
       }
    }
 
-   // Create by Owner
+   // Create CashCard
    @PostMapping
    public ResponseEntity<?> createCashCard(@RequestBody CashCard newCashCardRequest, UriComponentsBuilder ucb) {
       CashCard savedCashCard = cashCardRepository.save(newCashCardRequest);
@@ -124,7 +124,19 @@ public class CashCardController {
             .path("/owner/{owner}")
             .buildAndExpand(savedCashCard.id())
             .toUri();
-      return ResponseEntity.created(locationOfNewCashCard).build();
+      return ResponseEntity.created(locationOfNewCashCard)
+            .body("{\"id\": \"" + savedCashCard.id() + "\"}");
+   }
+
+   // Create AuthUser
+   @PostMapping("/authuser")
+   public ResponseEntity<?> createAuthUser(@RequestBody AuthUser newAuthUserRequest, UriComponentsBuilder ucb) {
+      AuthUser savedAuthUser = authUserRepository.save(newAuthUserRequest);
+      URI locationOfNewAuthUser = ucb
+            .path("/authuser/{authuser}")
+            .buildAndExpand(savedAuthUser.id())
+            .toUri();
+      return ResponseEntity.created(locationOfNewAuthUser).build();
    }
 
    // Auth user GET by name
