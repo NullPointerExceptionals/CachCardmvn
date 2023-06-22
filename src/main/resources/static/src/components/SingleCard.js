@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import fetchAuthUser from "../util/fetchAuthUser";
 import { Transactions } from "./Transactions";
 import { DeleteCard } from "./DeleteCard";
+import { AddFunds } from "./AddFunds";
 
 export const SingleCard = ({
   singleCard: { id, owner, amount },
@@ -10,6 +11,8 @@ export const SingleCard = ({
 }) => {
   const [authUser, setAuthUser] = useState({});
   const [deleteCardRender, setDeleteCardRender] = useState(false);
+  const [addFundsRender, setAddFundsRender] = useState(false);
+  const [addConfirmation, setAddConfirmation] = useState(false);
 
   useEffect(() => {
     fetchAuthUser(id, setAuthUser);
@@ -26,7 +29,7 @@ export const SingleCard = ({
         <button onClick={() => setSingleCardRender(false)}>
           Back to Cards
         </button>
-        <button>Add Funds</button>
+        <button onClick={() => setAddFundsRender(true)}>Add Funds</button>
         <button onClick={() => setDeleteCardRender(true)}>Delete Card</button>
       </div>
       {deleteCardRender ? (
@@ -38,6 +41,18 @@ export const SingleCard = ({
           setCardsData={setCardsData}
         />
       ) : null}
+      {addFundsRender ? (
+        <AddFunds
+          id={id}
+          owner={owner}
+          setAddFundsRender={setAddFundsRender}
+          setAddConfirmation={setAddConfirmation}
+          setSingleCardRender={setSingleCardRender}
+          setCardsData={setCardsData}
+        />
+      ) : null}
+
+      {addConfirmation ? <p>Funds Added Successfully</p> : null}
       <Transactions id={id} />
     </>
   );
