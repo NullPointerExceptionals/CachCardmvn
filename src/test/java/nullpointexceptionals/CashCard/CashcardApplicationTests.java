@@ -78,14 +78,16 @@ class CashcardApplicationTests {
     @Test
     @DirtiesContext
     void shouldCreateANewCashCard() {
-        CashCard newCashCard = new CashCard(null, 250.00, null);
-        ResponseEntity<Void> createResponse = restTemplate.postForEntity("/cashcards/owner/Nathan", newCashCard, Void.class);
+        CashCard newCashCard = new CashCard(null, 250.00, "Nathan");
+        ResponseEntity<Void> createResponse = restTemplate.exchange("/cashcards", HttpMethod.POST, new HttpEntity<>(newCashCard), Void.class);
         assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-
+        
         URI locationOfNewCashCard = createResponse.getHeaders().getLocation();
-        ResponseEntity<String> getResponse = restTemplate.getForEntity(locationOfNewCashCard, String.class);
+        if (locationOfNewCashCard != null) {
+        String cashCardId = locationOfNewCashCard.getPath().replace("/owner/", "/cashcards/");
+        ResponseEntity<String> getResponse = restTemplate.getForEntity(cashCardId, String.class);
         assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-
+        
         DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
         Number id = documentContext.read("$.id");
         Double amount = documentContext.read("$.amount");
@@ -94,8 +96,10 @@ class CashcardApplicationTests {
         assertThat(id).isNotNull();
         assertThat(amount).isEqualTo(250.00);
         assertThat(owner).isEqualTo("Nathan");
-   
-	}
+        } else {
+            throw new Error("cashcard location is null");
+        }
+    }
    // Update by Owner and ID
     @Test
 	@DirtiesContext
