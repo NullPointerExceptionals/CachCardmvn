@@ -10,6 +10,16 @@ html {
   min-height: 100vh;
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 5rem;
+  margin: 1rem 0;
+}
+
 .flex {
   display: flex;
 }
@@ -18,8 +28,8 @@ html {
   text-align: center;
 }
 
-.login form input {
-  margin: 1rem;
+.loginTitle {
+  margin: 2rem 2rem 3rem 2rem;
 }
 
 .loginError {
@@ -34,6 +44,7 @@ html {
 }
 .cardBody,
 .cardBodySingle {
+  width: max-content;
   padding: 3rem 6rem;
   margin: 2rem;
   border-radius: 1rem;
@@ -63,8 +74,9 @@ html {
 input {
   border-radius: 5rem;
   padding: 0.5rem 1rem;
-  margin: 1rem;
+  margin: 1rem auto;
   border: 0.1rem solid #96e3ff;
+  display: block;
 }
 
 button,
